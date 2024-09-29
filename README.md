@@ -31,7 +31,7 @@ $$
 \text{Frecuencia esperada} = \frac{30}{5} = 6
 $$
 
-Ahora como nos pide que sea en 5 clases clasificamos los datos dentro de las siguientes clases:
+Ahora como nos pide que sea en 5 clases, entonces clasificamos los datos dentro de los siguientes rangos:
 
 `[0.0, 0.199], [0.2, 0.399], [0.4, 0.599], [0.6, 0.799], [0.8, 0.999]`
 
