@@ -83,24 +83,20 @@ $$
 \chi^2 Teórica= (0.05, \text{Clases restantes}-1)
 $$
 
-Y a clases restantes se refiere a las columnas en donde haya informacion, por lo que en nuestro caso nos queda:
+De igual forma a clases restantes se refiere a las columnas en donde haya informacion, por lo que en nuestro caso nos queda:
 
 $$
 \chi^2 Teórica= (0.05, 4-1)
 $$
 
-**El 0.05 es el 5% que nos indica el ejercicio**
-
-Y una vez teniendo eso, se procede a buscar los valores en una [tabla de distribución de Xi^2](Tablas.pdf) (En el simulador se usa la libreria de **Scipy** para la consulta de los valores de las tablas), 
-
-Donde:
-
 $$
 \chi^2 Teórica= (\text{Columna, Fila})
 $$
+**El 0.05 es el 5% que nos indica el ejercicio**
 
-Y una vez encontrado el valor en la tabla nos dice que este es:
+Y una vez teniendo eso, se procede a buscar los valores en una [tabla de distribución de Xi^2](Tablas.pdf) (En el simulador se usa la libreria de **Scipy** para la consulta de los valores de las tablas)
 
+El resultado es:
 $$
 \chi^2 Teórica= 7.81
 $$
