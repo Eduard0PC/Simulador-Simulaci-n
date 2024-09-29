@@ -7,6 +7,10 @@ a = int(input("Introduce el valor de la constante multiplicativa (a): "))
 #c = int(input("Introduce el valor de la constante aditiva (c): "))
 m = int(input("Introduce el valor del módulo de m: "))
 
+while m <= 0 or m <= a or m <= x0:
+    print(f"El valor de m debe ser mayor que 0, mayor que a ({a}), y mayor que X0 ({x0}). Inténtalo de nuevo.")
+    m = int(input("Introduce un valor válido para el módulo de m: "))
+
 c = 0 
 xn = []
 xn.append(x0)
