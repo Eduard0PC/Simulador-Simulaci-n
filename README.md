@@ -91,7 +91,7 @@ $$
 
 **El 0.05 es el 5% que nos indica el ejercicio**
 
-Y una vez teniendo eso, se procede a buscar los valores en una [tabla de distribución de $Xi^2$](Tablas.pdf) (En el simulador se usa la libreria de **Scipy** para la consulta de los valores de las tablas), 
+Y una vez teniendo eso, se procede a buscar los valores en una [tabla de distribución de Xi^2](Tablas.pdf) (En el simulador se usa la libreria de **Scipy** para la consulta de los valores de las tablas), 
 
 Donde:
 
