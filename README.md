@@ -2,17 +2,16 @@
 Simulador de la materia simulación, el cual incluye los simuladores de:
 - Generador de numeros PseudoAleatorios
 - Simulador de Uniformidad
-<<<<<<< HEAD
 - Simuador de Aleatoridad
+- Simulador de independencia (Proximamente)
 
 **Ejemplos:**
 
 ### SIMULADOR DE UNIFORMIDAD 
 Pruebe la uniformidad de la siguiente muestra con 5 clases y α = 5%
 
-|       |       |       |       |       |       |
-|-------|-------|-------|-------|-------|-------|
 | 0.715 | 0.965 | 0.318 | 0.495 | 0.107 | 0.661 |
+|-------|-------|-------|-------|-------|-------|
 | 0.253 | 0.539 | 0.161 | 0.134 | 0.161 | 0.868 |
 | 0.837 | 0.580 | 0.186 | 0.158 | 0.105 | 0.742 |
 | 0.844 | 0.098 | 0.288 | 0.285 | 0.209 | 0.264 |
@@ -66,7 +65,7 @@ Asi que la tabla nos queda de la siguiente manera:
 | Frec Obs |8|6|6|10|0|
 | Xi<sup>2</sup>|2/3|0|0|1/3|0|
 
-Teniendo lista la tabla entonces se procede a calcular la $ Xi^2$ observada, la cual tiene la siguiente formula:
+Teniendo lista la tabla entonces se procede a calcular la $Xi^2$ observada, la cual tiene la siguiente formula:
 
 $$
 \chi^2 Observada= \sum \chi^2
@@ -92,7 +91,7 @@ $$
 
 **El 0.05 es el 5% que nos indica el ejercicio**
 
-Y una vez teniendo eso, se procede a buscar los valores en una [tabla de distribución de $\chi ^2 $](Tablas.pdf) (En el simulador se usa la libreria de **Scipy** para la consulta de los valores de las tablas), 
+Y una vez teniendo eso, se procede a buscar los valores en una [tabla de distribución de $\chi^2$](Tablas.pdf) (En el simulador se usa la libreria de **Scipy** para la consulta de los valores de las tablas), 
 
 Donde:
 
@@ -114,7 +113,4 @@ Volviendo con el ejercicio se puede decir que:
 
 *(Ya que el 1.0 de la frecuencia observada es menor que el 7.81 de la frecuencia teórica)*
 ***
-=======
-- Simulador de Aleatoridad
-- Simulador de Independencia (Proximamente) 
->>>>>>> 3dd8d50fc1d56bb473fded2070366d33b4b186a9
+
