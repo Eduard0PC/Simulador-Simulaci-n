@@ -35,7 +35,7 @@ Ahora como nos pide que sea en 5 clases, entonces clasificamos los datos dentro 
 
 `[0.0, 0.199], [0.2, 0.399], [0.4, 0.599], [0.6, 0.799], [0.8, 0.999]`
 
-por lo que distribuimos cada uno de los valores dentro de esos rangos para asi obtener la frecuencia observada (que en otras palabras se traduce a contar los numeros) y nos queda de la siguiente manera:
+por lo que distribuimos cada uno de los valores para asi obtener la frecuencia observada (que en otras palabras se traduce a contar los numeros) y nos queda de la siguiente manera:
 
 |       |0.0, 0.199|0.2, 0.399|0.4, 0.599|0.6, 0.799|0.8, 0.999|
 |-------|-------|-------|-------|-------|-------|
