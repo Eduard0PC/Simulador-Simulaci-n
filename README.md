@@ -2,6 +2,7 @@
 Simulador de la materia simulación, el cual incluye los simuladores de:
 - Generador de numeros PseudoAleatorios
 - Simulador de Uniformidad
+<<<<<<< HEAD
 - Simuador de Aleatoridad
 
 **Ejemplos:**
@@ -113,3 +114,7 @@ Volviendo con el ejercicio se puede decir que:
 
 *(Ya que el 1.0 de la frecuencia observada es menor que el 7.81 de la frecuencia teórica)*
 ***
+=======
+- Simulador de Aleatoridad
+- Simulador de Independencia (Proximamente) 
+>>>>>>> 3dd8d50fc1d56bb473fded2070366d33b4b186a9
