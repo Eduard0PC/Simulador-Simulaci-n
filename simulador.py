@@ -58,7 +58,7 @@ print("\n-----------------------------------------------------------------------
 #FIN PRIMER SIMULADOR ----------------------------------------------------------------------------------------------------------------------------------
 
 #INICIO SEGUNDO SIMULADOR (UNIFORMIDAD)----------------------------------------------------------------------------------------------------------------------------------
-nums = [round(x/m, 3) for x in xnplusone[:100]] #Generacion de un array que contenga solamente los primeros 100 numeros generados anteriormente
+nums = [round(x/m, 5) for x in xnplusone[:100]] #Generacion de un array que contenga solamente los primeros 100 numeros generados anteriormente
 tamanioMuestra = 100 
 numClass = 5  #Se inician con 5 clases 
 frecEspInicial = tamanioMuestra / numClass  #La frecuencia esperada en un principio sera el tamaño de la muestra entre el numero de clases
@@ -263,3 +263,103 @@ else:
     print("\nLa muestra NO es aleatoria")
 print("\n------------------------------------------------------------------------------------")
 #FIN TERCER SIMULADOR (ALEATORIDAD)----------------------------------------------------------------------------------------------------------------------------------
+
+#INICIO CUARTO SIMULADOR (INDEPENDENCIA)----------------------------------------------------------------------------------------------------------------------------------
+nums_indepen = [int(num * 100000) for num in nums] #se multiplican cada valor de nums por 10000 para asi tener numeros de 5 cifras
+print(nums_indepen)
+
+probaTeo = [0.3024,0.5040,0.0720,0.1080,0.0090,0.0045,0.0001]
+frecEsp = [i * tamanioMuestra for i in probaTeo]
+
+tDif = 0 #Todos los dígitos son diferentes
+unPar = 0 #Un dígito se repite 2 veces
+dosPar = 0 #Dos dígitos se repiten dos veces
+tercia = 0 #Un dígito se repite 3 veces
+full = 0 #Un dígito se repite 3 veces y otro 2 veces
+poker = 0 #Un dígito se repite 4 veces
+quintilla = 0 #Todos los dígitos son iguales
+
+for i in nums_indepen:
+    digitos = [int(digito) for digito in str(i)] #Separa los digitos del numero individualmente
+    
+    chiObs = 0 #Se reinicia el contador de chiObs para evitar sumas inecesarias 
+
+    numClass = 7
+
+    repeticiones = [0] * 10 #Se crea un array que que representa los numeros del 0 al 9  = [0,0,0,0,0,0,0,0,0,0]
+    for num in digitos:
+        repeticiones[num] += 1 #Se cuentan cuantas veces se repite el numero de digito y lo guarda en el array, 
+        #por ejemplo si el numero es 133888 entonces el array queda [0,1,0,2,0,0,0,2,0], por que hay 1 uno, 2 tres y 2 ochos
+
+    if repeticiones.count(1) == 5: #Si el uno aparece 5 veces dentro del arrayd de repeticiones, ejem [0,1,1,0,0,1,0,1,0,1] (ignifica que todos son diferentes)
+        tDif += 1
+
+    if repeticiones.count(2) == 1 and repeticiones.count(1) == 3:
+        unPar+= 1
+
+    if repeticiones.count(2) == 2 and repeticiones.count(1) == 1:
+        dosPar += 1
+
+    if repeticiones.count(3) == 1 and repeticiones.count(1) == 3:
+        tercia += 1
+
+    if repeticiones.count(3) == 1 and repeticiones.count(2) == 1:
+        full += 1
+    
+    if repeticiones.count(4) == 1 and repeticiones.count(1) == 1:
+        poker += 1
+    
+    if repeticiones.count(5) == 1:
+        quintilla += 1
+
+frecObs = [tDif, unPar, dosPar, tercia, full, poker, quintilla]
+
+preTablaSim4 = pd.DataFrame({
+    "Probabilidad Teórica": probaTeo,
+    "Frec Esperada": frecEsp,
+    "Frec Observada": frecObs
+},index=["Diferentes","Un par","Dos Pares","Tercia","Full","Poker","Quintilla"])
+
+for i in range(len(frecObs) - 1, 0, -1):
+    if frecObs[i] < 5:
+        frecObs[i - 1] += frecObs[i]
+        frecEsp[i - 1] += frecEsp[i]
+
+        frecObs[i] = 0
+        frecEsp[i] = 0
+
+chicuadrado = []
+for i in range(numClass):
+    if frecEsp[i] != 0: 
+        calculo = ((frecEsp[i] - frecObs[i]) ** 2) / frecEsp[i]
+    else:
+        calculo = 0
+    chicuadrado.append(calculo)
+    chiObs += calculo
+
+TablaSim4 = pd.DataFrame({
+    "Probabilidad Teórica": probaTeo,
+    "Frec Esperada": frecEsp,
+    "Frec Observada": frecObs,
+    "Xi^2": chicuadrado
+},index=["Diferentes","Un par","Dos Pares","Tercia","Full","Poker","Quintilla"])
+
+clasRestante = len([f for f in frecEsp if f > 0])  
+chiTeo = stats.chi2.ppf(1 - colum, (clasRestante - 1)) #De igual manera se aplica la formula del chi Teorico mediante la libreria de Scipy
+
+print("\n------------------------------------------------------------------------------------")
+print("\nSIMULADOR DE INDEPENDENCIA: ")
+print("\nLos numeros de 5 cifras: ")
+print("\n", nums_indepen)
+print("\nLa tabla: ")
+print(preTablaSim4)
+print("\nLa tabla con las cuando la frecuencia observada minima a 5: ")
+print(TablaSim4)
+print(f"\nX^2 Observada = {chiObs}")
+print(f"\nX^2 Teorica {(colum, clasRestante)} = {chiTeo}")
+if chiTeo > chiObs:
+    print("\nLa muestra SI es independiente")
+else:
+    print("\nLa muestra NO es independiente")
+print("\n------------------------------------------------------------------------------------")
+#FIN CUARTO SIMULADOR (INDEPENDENCIA)----------------------------------------------------------------------------------------------------------------------------------

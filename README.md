@@ -107,8 +107,11 @@ Teniendo toda esta informacion, si la frecuencia observada es mayor que la teór
 
 Volviendo con el ejercicio se puede decir que:
 
-#### LA MUESTRA SI ES UNIFORME
+**LA MUESTRA SI ES UNIFORME**
 
 *(Ya que el 1.0 de la frecuencia observada es menor que el 7.81 de la frecuencia teórica)*
 ***
+### SIMULADOR DE ALEATORIDAD ##
+
+
 
