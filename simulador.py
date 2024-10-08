@@ -312,7 +312,7 @@ for i in nums_indepen:
     if repeticiones.count(5) == 1:
         quintilla += 1
 
-frecObs = [tDif, unPar, dosPar, tercia, full, poker, quintilla]
+frecObs = [tDif, unPar, dosPar, tercia, full, poker, quintilla] #Se crea un array para almacenar los valores de los contadores
 
 preTablaSim4 = pd.DataFrame({
     "Probabilidad Teórica": probaTeo,
@@ -320,6 +320,7 @@ preTablaSim4 = pd.DataFrame({
     "Frec Observada": frecObs
 },index=["Diferentes","Un par","Dos Pares","Tercia","Full","Poker","Quintilla"])
 
+#Se verifica nuevamente si la frecuencia observada es mayor a 5 y si no entonces se suma a la columna anterior
 for i in range(len(frecObs) - 1, 0, -1):
     if frecObs[i] < 5:
         frecObs[i - 1] += frecObs[i]
@@ -328,6 +329,7 @@ for i in range(len(frecObs) - 1, 0, -1):
         frecObs[i] = 0
         frecEsp[i] = 0
 
+#Se hacen nuevamente los calculos de chicuadrado
 chicuadrado = []
 for i in range(numClass):
     if frecEsp[i] != 0: 
