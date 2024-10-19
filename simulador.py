@@ -2,16 +2,20 @@ import pandas as pd
 import scipy.stats as stats
 
 #INICIO PRIMER SIMULADOR ----------------------------------------------------------------------------------------------------------------------------------
-x0 = int(input("Introduce el valor de la semilla: "))
-a = int(input("Introduce el valor de la constante multiplicativa (a): "))
+#x0 = int(input("Introduce el valor de la semilla: "))
+#a = int(input("Introduce el valor de la constante multiplicativa (a): "))
 #c = int(input("Introduce el valor de la constante aditiva (c): "))
-m = int(input("Introduce el valor del módulo de m: "))
+#m = int(input("Introduce el valor del módulo de m: "))
+x0 = 125
+a = 16807
+m = 31767
+c = 0 
 
 while m <= 0 or m <= a or m <= x0:
     print(f"El valor de m debe ser mayor que 0, mayor que a ({a}), y mayor que X0 ({x0}). Inténtalo de nuevo.")
     m = int(input("Introduce un valor válido para el módulo de m: "))
 
-c = 0 
+
 xn = []
 xn.append(x0)
 rr = []
@@ -265,10 +269,10 @@ print("\n-----------------------------------------------------------------------
 #FIN TERCER SIMULADOR (ALEATORIDAD)----------------------------------------------------------------------------------------------------------------------------------
 
 #INICIO CUARTO SIMULADOR (INDEPENDENCIA)----------------------------------------------------------------------------------------------------------------------------------
-nums_indepen = [int(num * 100000) for num in nums] #se multiplican cada valor de nums por 10000 para asi tener numeros de 5 cifras
-print(nums_indepen)
+nums_indepen = [str(int(num * 100000)).zfill(5) for num in nums]
+ #se multiplican cada valor de nums por 10000 para asi tener numeros de 5 cifras
 
-probaTeo = [0.3024,0.5040,0.0720,0.1080,0.0090,0.0045,0.0001]
+probaTeo = [0.3024,0.5040,0.1080,0.0720,0.0090,0.0045,0.0001]
 frecEsp = [i * tamanioMuestra for i in probaTeo]
 
 tDif = 0 #Todos los dígitos son diferentes
@@ -300,7 +304,7 @@ for i in nums_indepen:
     if repeticiones.count(2) == 2 and repeticiones.count(1) == 1:
         dosPar += 1
 
-    if repeticiones.count(3) == 1 and repeticiones.count(1) == 3:
+    if repeticiones.count(3) == 1 and repeticiones.count(1) == 2:
         tercia += 1
 
     if repeticiones.count(3) == 1 and repeticiones.count(2) == 1:
@@ -322,7 +326,7 @@ preTablaSim4 = pd.DataFrame({
 
 #Se verifica nuevamente si la frecuencia observada es mayor a 5 y si no entonces se suma a la columna anterior
 for i in range(len(frecObs) - 1, 0, -1):
-    if frecObs[i] < 5:
+    if 0 < frecObs[i] < 5:
         frecObs[i - 1] += frecObs[i]
         frecEsp[i - 1] += frecEsp[i]
 
@@ -332,7 +336,7 @@ for i in range(len(frecObs) - 1, 0, -1):
 #Se hacen nuevamente los calculos de chicuadrado
 chicuadrado = []
 for i in range(numClass):
-    if frecEsp[i] != 0: 
+    if frecEsp[i] != 0 and frecObs[i] != 0:
         calculo = ((frecEsp[i] - frecObs[i]) ** 2) / frecEsp[i]
     else:
         calculo = 0
@@ -346,7 +350,7 @@ TablaSim4 = pd.DataFrame({
     "Xi^2": chicuadrado
 },index=["Diferentes","Un par","Dos Pares","Tercia","Full","Poker","Quintilla"])
 
-clasRestante = len([f for f in frecEsp if f > 0])  
+clasRestante = len([f for f in frecObs if f > 0])  
 chiTeo = stats.chi2.ppf(1 - colum, (clasRestante - 1)) #De igual manera se aplica la formula del chi Teorico mediante la libreria de Scipy
 
 print("\n------------------------------------------------------------------------------------")
@@ -358,7 +362,7 @@ print(preTablaSim4)
 print("\nLa tabla con las cuando la frecuencia observada minima a 5: ")
 print(TablaSim4)
 print(f"\nX^2 Observada = {chiObs}")
-print(f"\nX^2 Teorica {(colum, clasRestante)} = {chiTeo}")
+print(f"\nX^2 Teorica {(colum, clasRestante-1)} = {chiTeo}")
 if chiTeo > chiObs:
     print("\nLa muestra SI es independiente")
 else:
